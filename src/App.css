@@ -1,0 +1,83 @@
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  color: azure;
+  text-align: center;
+}
+
+.App header{
+  width: 100%;
+  min-height: 50px;
+  z-index: 3;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr 130px;
+  background: fixed rgb(35, 36, 36);
+  align-items: center;
+}
+.App header h1{
+  width: auto;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-self: self-start;
+  padding-left: 30px;
+  font-size: 30px;
+}
+.normalbutton{
+  align-self: center;
+  justify-self: center;
+  width:120px;
+  height: 4vh;
+  min-height: 30px;
+  margin-right: 50px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+@media (orientation: landscape){
+  .App main{
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+}
+  
+
+@media (min-width: 800px){
+  .App main{
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+} 
+@media (max-width: 800px){
+  .App main{
+    width: 100%;
+    background: white;
+    height:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+} 
+
+.App footer{
+  width: 100%;
+  min-height: 50px;
+
+  background: fixed rgb(35, 36, 36);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.App footer p{
+    padding-right: 40px;
+}
