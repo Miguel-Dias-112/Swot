@@ -1,0 +1,133 @@
+
+@media (min-width: 800px){
+    .Plotter_div{
+
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        border: 0px solid black;
+    }
+    .Div_central canvas{
+        width: 100%;
+        height: 100%;
+    }
+    .Div_central{
+        height: auto;
+        overflow: scroll;
+        display: inline-block;
+        min-width: 750px;
+        min-height: 60px;
+        border: 3px solid black;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 90%;
+        max-width: 1200px;
+        z-index: 2;
+        max-height: 700px
+    }
+    
+}
+@media (orientation:landscape) {
+    .custombuttom{
+        align-self: center;
+        justify-self: center;
+        width:120px;
+        height: 4vh;
+        min-height: 30px;
+        margin-right: 50px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid black;
+      }
+}
+@media (max-width: 800px){
+    .Plotter_div{
+        position: fixed;
+        width: 100%;
+
+        top: 0;
+        left: 0;
+        height: 100vh ;
+        display: flex;
+        align-items: center;
+        background-color: whitesmoke;
+        justify-content: center;
+        
+        border: 0px solid black;
+    }
+    .Div_central canvas{
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+
+    }
+    .Div_central{
+        min-height: 400px;
+        min-width: 600px;
+        border-radius: 15px;
+        border: 3px solid black;
+        transform: rotate(90deg);
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
+    .Div_central button{
+        visibility: hidden;
+        transform: rotate(270deg);
+
+    }
+    .Div_central:hover button{
+        visibility: visible;
+        width: 150px;
+        height: 60px;
+        background: white;
+        border: 3px solid black;
+        border-radius: 15px;
+    
+    }
+    
+    .custombuttom{
+        position: fixed;
+        top:0px;
+        left:0px;
+        align-self: center;
+        justify-self: center;
+        z-index: 2;
+        width:100%;
+        height: 7vh;
+        margin-right: 50px;
+        background-color: black;
+        color: white;
+        font-size: 25px;
+        border: none;
+        border-bottom: 3px solid black;
+      }
+      .custombuttom:active{
+        background: white;
+        color: black;
+      }
+}
+
+
+  
+.Div_central:hover >*:not(.download_btn){
+    filter: blur(2px);
+}
+.Div_central button{
+    visibility: hidden;
+}
+.Div_central:hover button{
+    visibility: visible;
+    width: 150px;
+    height: 60px;
+    background: white;
+    border: 3px solid black;
+    border-radius: 15px;
+
+}
