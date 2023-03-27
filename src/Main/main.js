@@ -34,7 +34,16 @@ class Main extends React.Component {
     }
     mounted=false
     componentDidMount(){
-
+        let button=document.getElementById('btn_grafico')
+        button.style.visibility='visible'
+        button.innerText='gerar grafico'
+       
+        let h1 = document.getElementById('titulo')
+        h1.innerHTML='Voltar'
+        h1.onclick=function(){
+            let ProjectPage = document.getElementById('ProjectPage')
+            ProjectPage.click()
+        }
 
 //       this.gera_elementos([{titulo:'abc',valor:'1'}, {titulo:'abc',valor:'2'} , {titulo:'abc',valor:'3'} ,{titulo:'abc',valor:'10'}, {titulo:'abc',valor:'10'}])
     }

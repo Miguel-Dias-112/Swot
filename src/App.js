@@ -4,6 +4,9 @@ import Dialog_força from './Dialog_força/Dialog_força.js';
 import React from 'react';
 import Main2 from './Main/main.js';
 import Plotter from './Plotter/plotter.js';
+import LandPage from './LandPage/landpage.js';
+import ProjectPage from './ProjectsPage/ProjectsPage.js';
+import {dados,NovoSwot} from './LandPage/FIrebase.js'
 
 import {
   MemoryRouter,
@@ -12,11 +15,15 @@ import {
   Link
 } from "react-router-dom";
 
+
+
 class App extends React.Component{
   constructor(props){
     super (props)
 
     this.state={
+   
+        elementoatual:'',
         Forças:[],
         Fraquezas:[],
         Ameaças:[],
@@ -24,15 +31,71 @@ class App extends React.Component{
         show:'',
 
         SwotDao:{
-          adicionar:(nome, titulo,valor)=>{
+          load:(nome,dados,pai)=>{
             Object.keys(this.state).forEach((key) => {
               if(key==nome){
                 let elemento = this.state[key]
-                elemento.push({titulo,valor})
-                this.setState(nome=elemento)
-                console.log(this.state)
+                elemento=dados
+            
+
+                if(key=='Forças'){
+
+                  this.setState({'Forças':elemento,elementoatual:pai})
+                }
+                if(key=='Fraquezas'){
+
+                  this.setState({'Fraquezas':elemento,elementoatual:pai})
+                }
+                if(key=='Ameaças'){
+
+                  this.setState({'Ameaças':elemento,elementoatual:pai})
+                }
+                if(key=='Oportunidades'){
+
+                  this.setState({'Oportunidades':elemento,elementoatual:pai})
+                }
               }
             });
+          },
+          adicionar:(nome, titulo,valor)=>{
+            
+            Object.keys(this.state).forEach((key) => {
+              if(key==nome){
+                //salva na tela
+                let elemento = this.state[key]
+                elemento.push({titulo:titulo,valor:valor})
+
+                let json ='{ "'+nome+'": '+ JSON.stringify(elemento) +'}' 
+                this.setState(JSON.parse(json))
+                console.log('SwotDao: criei novo elemento')
+                console.log(elemento)
+                console.log('SwotDao: key')
+
+                console.log(key)
+                console.log(nome)
+
+
+                
+               
+              }
+            });
+
+            Object.keys(dados).forEach(
+              (item)=>{
+                  if(this.state.elementoatual==item){
+                    let Data = {
+                      Forças:this.state.Forças,
+                      Fraquezas:this.state.Fraquezas,
+                      Oportunidades:this.state.Oportunidades,
+                      Ameaças:this.state.Ameaças
+                    }
+
+                    NovoSwot(item,Data)
+
+                  }
+              }
+            )
+            
           },
           remover:(nome, titulo,valor)=>{
             Object.keys(this.state).forEach((key) => {
@@ -75,7 +138,7 @@ class App extends React.Component{
   }
   componentDidUpdate(){
     console.log('app: atualizei')
-
+    console.log(this.state)
 
   }
   componentDidMount(){
@@ -88,31 +151,38 @@ class App extends React.Component{
     return (
       <div className="App">
         <header>
-          <h1> Analise Swot</h1>
-          <button className='normalbutton' onClick={(e)=>{
+          <h1 id='titulo'> Analise Swot</h1>
+          <button id='btn_grafico' className='normalbutton' onClick={(e)=>{
             let text = e.currentTarget.innerText
-            if (text=='gerar grafico'){
-              let plotter = document.getElementById('plotter')
-              plotter.click()
-              e.currentTarget.innerText='voltar'
-              e.currentTarget.className='custombuttom'
-            }else{
-              let home = document.getElementById('home')
-              home.click()
-              console.log('aqui')
-              e.currentTarget.innerText='gerar grafico'
-              e.currentTarget.className='normalbutton'
+            let home = document.getElementById('Main2').click()
+            let plotter = document.getElementById('plotter')
+
+            switch (text) {
+              case 'gerar grafico':
+                plotter.click()
+                e.currentTarget.innerText='voltar'
+                e.currentTarget.className='custombuttom'
+                break;
+              case 'voltar':
+                
+              default:
+                break;
             }
+        
+
+            
             
           }}> gerar grafico</button>
         </header>
         <main>
           <MemoryRouter>
-              <Link id='plotter' to='plotter'></Link>
+              <Link id='plotter' to='/plotter'></Link>
               <Link id='home' to='/'></Link>
+              <Link id='ProjectPage' to='/ProjectsPage'></Link>
+              <Link id='Main2' to='/Main2'></Link>
 
                 <Routes>
-                    <Route path='/' element={
+                    <Route path='/Main2' element={
                       <Main2 
                       Forças={this.state.Forças} 
                       show={this.state.show} 
@@ -123,6 +193,21 @@ class App extends React.Component{
                       </Main2>}>
                        
                     </Route>
+
+                    <Route path='/ProjectsPage' element={
+                      <ProjectPage SwotDao={this.state.SwotDao}
+                      
+                      >
+                      </ProjectPage>}>
+                       
+                    </Route>
+                    <Route path='/' element={
+                      <LandPage>
+
+                      </LandPage>}>
+                       
+                    </Route>
+
 
                     <Route path='/plotter' element={
                       <Plotter 

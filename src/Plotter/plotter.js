@@ -20,23 +20,30 @@ class Plotter extends React.Component {
         let Fr = this.props.Fraquezas
 
         function calc(list){
-            console.log('list')
+           
+
+
+            console.log('calc está calculando')
             console.log(list)
-           if( list != undefined){ 
-            
-            let soma = 0
-            list.forEach(el => {
-                soma +=parseFloat( el['valor'])
 
-            });
-            console.log('list soma')
-            console.log(soma)
+           if( list != undefined && list !=''){ 
+                let soma = 0
+                list.forEach(el => {
+                    if(el != undefined && el!=''){
+                        console.log('elemento trabalhado')
+                        console.log(el['valor'])
+                        soma +=parseFloat( el['valor'])
+                    }
+                    
 
-            return soma/list.length}
+                });
+                console.log('resultado da soma')
+                console.log(soma)
+
+                return soma/list.length}
             
             else{
-                console.log('list undef')
-
+                console.log('lista undef')
                 return 0
                 
             }
@@ -52,7 +59,8 @@ class Plotter extends React.Component {
             }
         })
         
-        
+        console.log('medias')
+
         console.log(medias)
         this.medias=medias
         return medias  
@@ -250,12 +258,15 @@ class Plotter extends React.Component {
             ctx.fill(); 
             ctx.stroke();
         }
+
+
         this.max = (h-(size+linew))/4
         let tam_mapeados = this.map(this.media(),this.max)
 
 //gambiarra foda pegou os valores da func calc e pos me nivel global por preguiça de arrumar
        
         console.log(tam_mapeados)
+        //desenhos
         background()
         categories(size)
         circles(size,tam_mapeados)
@@ -276,6 +287,9 @@ class Plotter extends React.Component {
     }
     componentDidMount(){
         
+        for (let i = 0; i < 10; i++) {
+            console.log('========================='+ i)
+          }
         window.onresize=this.windowchange
         let central_div= this.central_div.current
         let canvas= this.canvas.current
@@ -291,6 +305,13 @@ class Plotter extends React.Component {
         let Fr = this.props.Fraquezas
         console.log([F,A,O,Fr])
         this.desenho1()
+
+        let h1 = document.getElementById('titulo')
+          h1.innerHTML='Analise Swot'
+          h1.onclick=''
+
+
+        
     }
     componentDidUpdate(){
 
