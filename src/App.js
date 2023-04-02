@@ -6,7 +6,7 @@ import Main2 from './Main/main.js';
 import Plotter from './Plotter/plotter.js';
 import LandPage from './LandPage/landpage.js';
 import ProjectPage from './ProjectsPage/ProjectsPage.js';
-import {dados,NovoSwot} from './LandPage/FIrebase.js'
+import {dados,NovoSwot, updateprojeto} from './LandPage/FIrebase.js'
 
 import {
   MemoryRouter,
@@ -116,10 +116,24 @@ class App extends React.Component{
                     if(nó['titulo']==titulo&&nó['valor']==valor ){
                       let posição = elemento.indexOf(nó)
                       elemento.splice(posição,1)
-                      console.log('removedor:elemento excluido e pos')
+
+
+                      
+                      window.setTimeout(()=>{
+
+                        updateprojeto(this.state.elementoatual,{
+                          Forças:this.state.Forças,
+                          Fraquezas:this.state.Fraquezas,
+                          Ameaças:this.state.Ameaças,
+                          Oportunidades:this.state.Oportunidades,
+                        })
+                        console.log('removedor:elemento excluido e pos')
+                        
+                      },500)
 
                       console.log([elemento,posição])
                       this.setState(nome=elemento)
+
 
                     }
                 });

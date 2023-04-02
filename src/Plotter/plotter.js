@@ -273,12 +273,18 @@ class Plotter extends React.Component {
         circle(10,50)
         textos()
         divisions()
-
+        console.log(this.medias)
+        console.log(this.medias[0]+this.medias[1]>this.medias[2]+this.medias[3])
+        
         if(this.medias[0]+this.medias[1]>this.medias[2]+this.medias[3]){
             window.alert('situação vantajosa. Observe no infografico abaixo como os fatores ruins estão em proporção aos bons')
         }
         if(this.medias[0]+this.medias[1]<this.medias[2]+this.medias[3]){
             window.alert('situação ruim. Observe no infografico abaixo como os fatores ruins estão em proporção aos bons')
+
+        }
+        if(this.medias[0]+this.medias[1]==this.medias[2]+this.medias[3]){
+            window.alert('isso é uma situação neutra')
 
         }
 

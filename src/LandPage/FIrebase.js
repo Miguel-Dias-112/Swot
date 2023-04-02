@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
 
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"
-import { collection, addDoc,writeBatch, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"
+import { collection, updateDoc,writeBatch, doc, deleteField, getDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js"
 
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,7 +31,6 @@ const firebaseConfig = {
 };
 
 
-// Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -95,7 +94,7 @@ export function LoginEmail(params) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       console.log('Firebase Dao: estou executando')
- 
+
       
     }).catch((error) => {
       // Handle Errors here.
@@ -110,30 +109,15 @@ export async function NovoSwot(nome,Data) {
   const db = getFirestore(app);
 
 
-  let F=
-   {
-    Forças: Data['Forças'],
-    Fraquezas:Data['Fraquezas'],
-    Oportunidades:Data['Ameaças'],
-    Ameaças:Data['Oportunidades']
-   }
-  let json ='{ "'+nome+'": '+ JSON.stringify(F) +'}' 
+  let Swot = new Object()
+  Swot[nome]=Data
 
 
-  console.log(json)
-
-
-  
   const batch = writeBatch(db);
-
-// Set the value of 'NYC'
   const nycRef = doc(db, "users", uid);
-  batch.update(nycRef, JSON.parse(json));
-
- // await setDoc(doc(db, "users", uid),JSON.parse(json));
-  //console.log(obj)
+  batch.update(nycRef, Swot);
   await batch.commit();
-  console.log('Firebase Dao: dados escritos')
+  console.log('Firebase: dados escritos')
 
 }
 
@@ -158,3 +142,27 @@ export  async function PuxarDados() {
 }
 
 
+export async function updateprojeto(nome,data){
+  const db = getFirestore(app);
+  const batch = writeBatch(db);
+  const ref = doc(db, "users", uid);
+  let json ='{ "'+nome+'": '+ JSON.stringify(data) +'}' 
+  batch.update(ref, JSON.parse(json));
+  await batch.commit();
+  console.log('Firebase Dao: dados escritos')
+}
+
+export async function deletarprojeto(nome){
+  const db = getFirestore(app);
+
+  const ref = doc(db, "users", uid);
+  
+  let obj=new Object()
+  obj[nome]=deleteField( )
+  await updateDoc(ref,obj);
+
+}
+export async function deslogar(){
+  uid=''
+  dados=''
+}

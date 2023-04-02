@@ -59,6 +59,7 @@ filter: blur(2px);
 	height:80px;
 	bottom:60px;
 	right:40px;
+    z-index: 2;
 	background-color:white;
     display: flex;
     align-items: center;
@@ -72,15 +73,17 @@ filter: blur(2px);
     border: 2px solid black;
 }
 .float:hover{
-   background-color: black;
-   color: white;
+    z-index: 2;
+    background-color: gray;
+    border: 2px solid gray;
+    color: whitesmoke;
+
 }
 
 .float:active{
-    background-color: gray;
-    border: 2px solid gray;
-
-    color: whitesmoke;
+ 
+    background-color: black;
+    color: white;
  }
  
  

@@ -3,7 +3,7 @@
 import React, { createRef } from "react";
 import './ProjectsPage.css'
 //isso tem que ir pro state no APP como prop
-import  {   dados, NovoSwot, setdados  } from '../LandPage/FIrebase.js'
+import  {   dados, deletarprojeto, NovoSwot, setdados  } from '../LandPage/FIrebase.js'
 let meusdados = []
 
 class ProjectPage extends React.Component{
@@ -15,10 +15,12 @@ class ProjectPage extends React.Component{
     }
     this.ClickHandle=this.ClickHandle.bind(this)
     this.NovoProjeto=this.NovoProjeto.bind(this)
-
+    this.onMouseDown=this.onMouseDown.bind(this)
+    this.onMouseUp=this.onMouseUp.bind(this)
+    this.texto=createRef()
   }
 
-
+  cliqueLongo=false
   NovoProjeto(){
         let novo_elementos=this.state.elementos
         let nome =window.prompt("nome do projeto:")
@@ -44,19 +46,15 @@ class ProjectPage extends React.Component{
         }}
      
   }
-  ClickHandle(e){
-    let x = e.currentTarget
+  ClickHandle(element){
+    let x = element.target
     let SwotDao = this.props.SwotDao
+    
 
-    console.log('==============depuração')
 
-
-    let y = e.currentTarget.children[0]
+    let y = element.target.children[0]
 
     let texto =y.innerText
-
-    console.log(    Object.keys(meusdados))
-
     Object.keys(meusdados).forEach(
             
         (item) => {
@@ -117,7 +115,11 @@ class ProjectPage extends React.Component{
   
           let h1 = document.getElementById('titulo')
           h1.innerHTML='Analise Swot'
-          h1.onclick=''
+          h1.onclick=()=>{
+             let home=document.getElementById('home')
+             home.click()
+             console.log('teste')
+          }
 
           meusdados=dados
           console.log(meusdados)
@@ -126,18 +128,42 @@ class ProjectPage extends React.Component{
 
         
   }     
+  levantei =''
+  onMouseDown(e){
+    this.levantei = false
+    window.setTimeout(() => {
+        if(this.levantei==false){
+            //clique longo
+            let x = window.confirm('quer me excluir?')
+            if( x==true){
+                let nome=e.target.childNodes[0].innerText
+                let pai = document.getElementById('papai smurf')
+                deletarprojeto(nome)  
+                pai.removeChild(e.target)
+                
+            }
+        }
+        if(this.levantei==true){
+            
+            this.ClickHandle(e)
+        }
+    }, 500);
+  }
+  onMouseUp(){
+    this.levantei=true
+  }
   render(){
     
 
     return(            
         <div id="projetos" className="ProjectsPagemain">
-            <div className="projects">
+            <div className="projects" id="papai smurf">
             {
             
             this.state.elementos.map(element => {
 
-                return <div onClick={(e)=>{this.ClickHandle(e)}}className="project">{
-                    <h1 >
+                return <div onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} className="project">{
+                    <h1 ref={this.texto}>
                         {element}
                     </h1>
                 }</div>

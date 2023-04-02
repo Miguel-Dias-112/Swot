@@ -20,40 +20,20 @@ class List_element extends React.Component{
   return (
   
     <li onClick={(li)=>{
-      let outroli = this.props.lista.current.childNodes
    
 
       let firstclick = true
       if(li.currentTarget.style.background=='red'){
           firstclick = false
       }
-      console.log(firstclick)
+      console.log('minha cor')
       console.log(li.currentTarget.style.background)
-      
-      function reseta_outroslis(){
-        console.log('outroli')
-
-        outroli.forEach(outroli => {
-         
-
-          if(outroli==li.currentTarget){
-            outroli.style.background='red'
-            outroli.style.color='white'
-            outroli.style.borderRadius='15px'
-          }
-          else{
-            outroli.style.background='white'
-            outroli.style.color='black'
-            outroli.style.borderRadius='0px'
-          }
-        });
-      }
-
+    
       switch (firstclick) {
         
         case true:
           console.log('resetando')
-          reseta_outroslis()
+          this.props.resetar(li)
           break;
         case false:
           if( window.confirm("Você quer excluir o elemento")){
