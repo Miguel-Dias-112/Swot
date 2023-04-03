@@ -44,6 +44,8 @@ export function CreateUser(email, password) {
       console.log('registrei')
       console.log(user)
 
+      uid=user.uid()
+      await PuxarDados()
      // await setDoc(doc(db, "users",user.uid), new Object);
       
 
@@ -136,7 +138,7 @@ export  async function PuxarDados() {
     let _dados = docSnap.data()
     dados=_dados
     console.log(dados)
-    
+
     let linkto=document.getElementById('ProjectPage')
     linkto.click()
     console.log('Firebase Dao: estou executando')
