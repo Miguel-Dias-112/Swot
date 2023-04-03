@@ -61,7 +61,7 @@
     .landpageMain{
         display: grid;
         height: auto;
-        width: 100%;
+        width: 85%;
         padding-top: 50px;
         padding-bottom: 50px;
         display: flex;
@@ -173,7 +173,7 @@
 }
 .loginInputs input{
     border: 2px solid rgb(187, 187, 187);
-    border-radius: 10px;
+    border-radius: 5px;
     width: 70%;
 
     padding-top: 8px;

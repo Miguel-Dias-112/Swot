@@ -13,6 +13,8 @@ class LandPage extends React.Component{
     this.EntrarModoRegistro = this.EntrarModoRegistro.bind(this)
 
     this.botaoConfirmar = createRef()
+    this.botao2 = createRef()
+
     this.email = createRef()
     this.senha = createRef()
 
@@ -35,11 +37,12 @@ class LandPage extends React.Component{
             break;
         case 'confirmar':
             let modo = this.modo.current
-            let botãoCancelar = e.currentTarget
+            let botãoCancelar = this.botao2.current
             let texto = e.currentTarget.innerText
         
             let botão = this.botaoConfirmar.current
             CreateUser(email,senha)
+
             botãoCancelar.onClick=this.EntrarModoRegistro
             botãoCancelar.innerText='registrar'
             botão.innerText='entrar'
@@ -118,7 +121,7 @@ class LandPage extends React.Component{
                     <button ref={this.botaoConfirmar} onClick={this.Confirmar}>
                         entrar
                     </button>
-                    <button onClick={this.EntrarModoRegistro}>
+                    <button  ref={this.botao2} onClick={this.EntrarModoRegistro}>
                         registrar
                     </button>
 
