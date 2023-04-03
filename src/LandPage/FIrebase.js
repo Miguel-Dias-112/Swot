@@ -1,7 +1,7 @@
 
 import { initializeApp } from 'firebase/app';
 
-  import {getFirestore, collection, updateDoc,writeBatch, doc, deleteField, getDoc } from  "firebase/firestore"
+  import {getFirestore,setDoc, collection, updateDoc,writeBatch, doc, deleteField, getDoc } from  "firebase/firestore"
 
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -38,15 +38,23 @@ export function setdados(_dados){
 }
 export function CreateUser(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
       // Signed in
       const user = userCredential.user;
       console.log('registrei')
       console.log(user)
+
+     // await setDoc(doc(db, "users",user.uid), new Object);
+      
+
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(error)
+
+      console.log(errorMessage)
+
       // ..
     });
 }
@@ -64,9 +72,7 @@ export function LoginUser(email, password) {
       uid = user.uid
       await PuxarDados()
 
-      let linkto=document.getElementById('ProjectPage')
-      linkto.click()
-      console.log('Firebase Dao: estou executando')
+     
       
     })
     .catch((error) => {
@@ -86,8 +92,6 @@ export function LoginEmail(params) {
       uid = user.uid
       await PuxarDados()
 
-      let linkto=document.getElementById('ProjectPage')
-      linkto.click()
 
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -114,6 +118,8 @@ export async function NovoSwot(nome,Data) {
   const batch = writeBatch(db);
   const nycRef = doc(db, "users", uid);
   batch.update(nycRef, Swot);
+
+  
   await batch.commit();
   console.log('Firebase: dados escritos')
 
@@ -130,12 +136,19 @@ export  async function PuxarDados() {
     let _dados = docSnap.data()
     dados=_dados
     console.log(dados)
+    
+    let linkto=document.getElementById('ProjectPage')
+    linkto.click()
+    console.log('Firebase Dao: estou executando')
+    return true
 
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
-    return 'nada encontrado'
-
+    const db = getFirestore(app);
+    await setDoc(doc(db, "users",uid), new Object);
+    PuxarDados()
+    return false
   }
 }
 

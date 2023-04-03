@@ -17,7 +17,7 @@ class LandPage extends React.Component{
     this.senha = createRef()
 
     this.state={
-        modo:'logar'
+        modo:'login'
     }
   }
   Confirmar(e){

@@ -1,14 +1,29 @@
-.ProjectsPagemain{
 
-    display: grid;
-  
+@media (min-width: 800px){
+
+    .ProjectsPagemain{
+
+        display: grid;
+      
+        
+        width: 100%;
+        height: 100%;
     
-    width: 100%;
-    height: 100%;
-
-
+        
+    }
 }
+@media (max-width: 800px){
+    .ProjectsPagemain{
 
+        display: grid;
+      
+        
+        width: 100%;
+        height: 100vh;
+    
+        
+    }    
+}
 .projects{
     margin-top: 20px;
     margin-bottom: 20px;
