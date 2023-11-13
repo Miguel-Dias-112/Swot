@@ -18,6 +18,8 @@ class ProjectPage extends React.Component{
     this.onMouseDown=this.onMouseDown.bind(this)
     this.onMouseUp=this.onMouseUp.bind(this)
     this.texto=createRef()
+
+
   }
 
   cliqueLongo=false
@@ -52,9 +54,10 @@ class ProjectPage extends React.Component{
     
 
 
-    let y = element.target.children[0]
-
+    let y = this.texto.current
     let texto =y.innerText
+    console.log(y)
+
     Object.keys(meusdados).forEach(
             
         (item) => {
@@ -116,9 +119,12 @@ class ProjectPage extends React.Component{
           let h1 = document.getElementById('titulo')
           h1.innerHTML='Analise Swot'
           h1.onclick=()=>{
-             let home=document.getElementById('home')
-             home.click()
-             console.log('teste')
+            if(window.confirm("você quer desconectar?")){
+                let home=document.getElementById('home')
+                home.click()
+                console.log('teste')
+            }
+            
           }
 
           meusdados=dados
@@ -162,11 +168,17 @@ class ProjectPage extends React.Component{
             
             this.state.elementos.map(element => {
 
-                return <div onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} className="project">{
-                    <h1 ref={this.texto}>
-                        {element}
-                    </h1>
-                }</div>
+                return <div onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} className="project">
+                            <h1 ref={this.texto}>
+                                {element}
+                            </h1>
+                            <div className="corner ca" ></div>
+                            <div className="corner cb" ></div>
+                            <div className="corner cc" ></div>
+                            <div className="corner cd" ></div>
+                            
+                            
+                        </div>
                 })
 
                 }

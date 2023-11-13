@@ -17,8 +17,8 @@ class Dialog_força extends React.Component {
       let Dialog_div = document.getElementById('barrer')
       let orientação = window.screen.orientation.type
       let tamanhotela = window.screen.width
-console.log(tamanhotela)
-  console.log(orientação)
+    console.log(tamanhotela)
+      console.log(orientação)
 
       Dialog_div.style.visibility='visible'
       this.setState({elemento_trabalhado:elemento})
