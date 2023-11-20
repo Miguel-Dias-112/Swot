@@ -142,10 +142,10 @@ class ProjectPage extends React.Component{
             //clique longo
             let x = window.confirm('quer me excluir?')
             if( x==true){
-                let nome=e.target.childNodes[0].innerText
+                let nome=this.texto.current.innerText
                 let pai = document.getElementById('papai smurf')
                 deletarprojeto(nome)  
-                pai.removeChild(e.target)
+                pai.removeChild(this.texto.current.parentElement)
                 
             }
         }
