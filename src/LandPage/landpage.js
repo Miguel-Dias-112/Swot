@@ -101,7 +101,7 @@ class LandPage extends React.Component{
             Análise SWOT ou Análise FOFA é uma técnica de planejamento estratégico
              utilizada para auxiliar pessoas ou organizações a identificar forças,
               fraquezas, oportunidades, e ameaças relacionadas à competição em negócios
-               ou planejamento de projetos. Este App gratuito destina-se a automatiar da criação de tabelas swots, com display intuitivo e graficos autogerados
+               ou planejamento de projetos. Este App gratuito destina-se a automatizar a criação de tabelas swots, com display intuitivo e graficos autogerados
 
             </p>
         </div>
